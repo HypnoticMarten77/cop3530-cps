@@ -7,7 +7,7 @@
 #include "Tree.h"
 using namespace std;
 
-void getData(set<Node*>& trees) {
+void getData(set<Tree>& trees) {
 
     ifstream inFile;
     inFile.open("data.csv");
@@ -15,16 +15,16 @@ void getData(set<Node*>& trees) {
     getline(inFile, tempLine);
 
     Tree newTree;
-    
-    //Replace 49 with 50 for the correct number of courses.  FGZ is broken in the first semester for some reason.
-    for (int j = 0; j < 49; j++) {
+
+    for (int j = 0; j < 50; j++) {
+
         getline(inFile, tempLine);
 
         int pos = 0;
         string course;
         while ((pos = tempLine.find(",")) != string::npos) {
             course = tempLine.substr(0, pos);
-            cout << course << endl;     //To test fetching course code, can be deleted.
+            // cout << course << endl;     //To test fetching course code, can be deleted.
             tempLine.erase(0, pos + 1);
             break;
         }
@@ -77,15 +77,17 @@ void getData(set<Node*>& trees) {
 
         Node* node = newTree.searchNode(newTree.root, newDate);
         node->assignments[course]++;
+
     }
-    
-    //This is where we would add the tree to the set.
+
+    //This is where we add the tree to the set.
+    trees.insert(newTree);
 
 }
 
 int main() {
 
-    set<Node*> trees;
+    set<Tree> trees;
     getData(trees);
     return 0;
 
