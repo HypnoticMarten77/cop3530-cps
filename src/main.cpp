@@ -18,17 +18,16 @@ void getData(map<string, Tree>& trees) {
         getline(inFile, semesterName, ',');
         getline(inFile, tempLine);
 
-
         Tree newTree;
         for (int j = 0; j < 50; j++) {
 
             getline(inFile, tempLine);
 
+            // this section fetches the source code
             int pos = 0;
             string course;
             while ((pos = tempLine.find(",")) != string::npos) {
                 course = tempLine.substr(0, pos);
-                // cout << course << endl;     //To test fetching course code, can be deleted.
                 tempLine.erase(0, pos + 1);
                 break;
             }
@@ -41,6 +40,7 @@ void getData(map<string, Tree>& trees) {
             string outDate = "";
             bool success;
 
+            // this loop is responsible for removing the '/' from the dates
             while ((pos = tempLine.find(",")) != string::npos) {
                 inDate = tempLine.substr(0, pos);
                 number = outDate = "";
@@ -64,11 +64,14 @@ void getData(map<string, Tree>& trees) {
                 blank.clear();
                 success = false;
 
+                // inserting the node for the data if it isn't already in the tree,
                 if (newTree.searchNode(newTree.root, newDate) == nullptr)
                     newTree.root = newTree.insert(newTree.root, newDate, blank, success);
 
+                // increments the count in the nodes map
                 Node* node = newTree.searchNode(newTree.root, newDate);
                 node->assignments[course]++;
+
             }
 
             //This section is here because there is no comma following the last date in the line, so we need to perform the previous actions one more time.
@@ -76,7 +79,7 @@ void getData(map<string, Tree>& trees) {
 
             for (int i = 0; i < 2; i++) {
                 size_t pos2 = tempLine.find("/");
-                if ((i == 2) && (stoi(tempLine.substr(0, pos2)) < 10)) {
+                if ((i == 1) && (stoi(tempLine.substr(0, pos2)) < 10)) {
                     number = number + "0" + tempLine.substr(0, pos2);
                 }
                 else {
@@ -98,7 +101,7 @@ void getData(map<string, Tree>& trees) {
 
         }
 
-        //This is where we add the tree to the map.
+        //This is where we add the tree to the map
         trees.insert(pair<string, Tree>(semesterName, newTree));
         getline(inFile, tempLine);
         getline(inFile, tempLine);
@@ -108,6 +111,7 @@ void getData(map<string, Tree>& trees) {
     cout << "Done!\n" << endl;
 }
 
+// this function simply returns and int* that can be printed to output the passed in date
 int* printDate(int date) {
     int* array = new int[8];
     int remainder;
@@ -123,6 +127,7 @@ int* printDate(int date) {
     return array;
 }
 
+// this function prints the dates of all of the nodes that have assignments due - it also utilizes preOrder traversal to do so
 void listDates(Node* node) {
     if (node == nullptr)
         return;
@@ -142,6 +147,8 @@ void listDates(Node* node) {
 }
 
 int main() {
+
+    // introduction to the software
     map<string, Tree> trees;
     cout << "Course Planning Software v1.0" << endl;
     cout << "By: Andres Maldonado-Martin and David DeVore" << endl;
@@ -152,6 +159,7 @@ int main() {
     cout << "Welcome to CPS! Use the commands below to perform your requested action.\n" << endl;
     int option;
 
+    // this is the menu of options
     while (true) {
         cout << "1. Insert new date into the database" << endl;
         cout << "2. Insert new assignment for a given date" << endl;
@@ -167,6 +175,8 @@ int main() {
         bool success;
 
         switch (option) {
+
+        // this is where we insert a new date into the database
         case 1:
             cout << "\nPlease input the semester you wish to add a date to. (Fall/Spring): ";
             cin >> inputString;
@@ -200,6 +210,8 @@ int main() {
                 }
             }
             break;
+
+        // this is where we insert a new assignment for a given date
         case 2:
             cout << "\nPlease input the semester you wish to add an assignment to. (Fall/Spring): ";
             cin >> inputString;
@@ -235,6 +247,8 @@ int main() {
                 }
             }
             break;
+
+        // this is where we remove an assignment from a given date
         case 3:
             cout << "\nPlease input the semester you wish to remove an assignment from. (Fall/Spring): ";
             cin >> inputString;
@@ -284,6 +298,8 @@ int main() {
                 }
             }
             break;
+
+        // this is where we view the assignment list for a given date
         case 4:
             cout << "\nPlease input the semester of the date you wish to look at. (Fall/Spring): ";
             cin >> inputString;
@@ -315,6 +331,8 @@ int main() {
                 }
             }
             break;
+
+        // this is where we view dates with assignments due in any given semester
         case 5:
             cout << "\nPlease input the semester of the you wish to look at. (Fall/Spring): ";
             cin >> inputString;
@@ -333,6 +351,8 @@ int main() {
                 cout << endl;
             }
             break;
+
+        // finally, this is where we exit the program
         case 6:
             return 0;
         default:
