@@ -134,9 +134,7 @@ void listDates(Node* node) {
     else {
         if (node->assignments.empty() == false) {
             int* a = printDate(node->date);
-            if (to_string(node->date).length() == 6)
-                cout << a[5] << "/" << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << endl;
-            else if (to_string(node->date).length() == 7)
+            if (to_string(node->date).length() == 7)
                 cout << a[6] << "/" << a[5] << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << endl;
             else
                 cout << a[7] << a[6] << "/" << a[5] << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << endl;
@@ -232,9 +230,7 @@ int main() {
                     cout << "\nThis date isn't in this semester. Please add it before adding an assignment.\n" << endl;
                 else {
                     int* a = printDate(inputInt);
-                    if (to_string(inputInt).length() == 6)
-                        cout << "\nAssignment list for " << a[5] << "/" << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
-                    else if (to_string(inputInt).length() == 7)
+                    if (to_string(inputInt).length() == 7)
                         cout << "\nAssignment list for " << a[6] << "/" << a[5] << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
                     else
                         cout << "\nAssignment list for " << a[7] << a[6] << "/" << a[5] << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
@@ -269,9 +265,7 @@ int main() {
                     cout << "\nThis date isn't in this semester. Please add it before removing an assignment.\n" << endl;
                 else {
                     int* a = printDate(inputInt);
-                    if (to_string(inputInt).length() == 6)
-                        cout << "\nAssignment list for " << a[5] << "/" << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
-                    else if (to_string(inputInt).length() == 7)
+                    if (to_string(inputInt).length() == 7)
                         cout << "\nAssignment list for " << a[6] << "/" << a[5] << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
                     else
                         cout << "\nAssignment list for " << a[7] << a[6] << "/" << a[5] << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
@@ -320,9 +314,7 @@ int main() {
                     cout << "\nThis date isn't in this semester. Please add it before viewing information regarding it.\n" << endl;
                 else {
                     int* a = printDate(inputInt);
-                    if (to_string(inputInt).length() == 6)
-                        cout << "\nAssignment list for " << a[5] << "/" << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
-                    else if (to_string(inputInt).length() == 7)
+                    if (to_string(inputInt).length() == 7)
                         cout << "\nAssignment list for " << a[6] << "/" << a[5] << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
                     else
                         cout << "\nAssignment list for " << a[7] << a[6] << "/" << a[5] << a[4] << "/" << a[3] << a[2] << a[1] << a[0] << ": " << endl;
