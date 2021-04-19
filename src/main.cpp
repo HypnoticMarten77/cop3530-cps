@@ -7,15 +7,17 @@
 #include "Tree.h"
 using namespace std;
 
-void getData(set<Tree>& trees) {
+void getData(map<string, Tree>& trees) {
 
     ifstream inFile;
     inFile.open("data.csv");
+    string semesterName;
     string tempLine;
+    getline(inFile, semesterName, ',');
     getline(inFile, tempLine);
 
-    Tree newTree;
 
+    Tree newTree;
     for (int j = 0; j < 50; j++) {
 
         getline(inFile, tempLine);
@@ -80,14 +82,14 @@ void getData(set<Tree>& trees) {
 
     }
 
-    //This is where we add the tree to the set.
-    trees.insert(newTree);
+    //This is where we add the tree to the map.
+    trees.insert(pair<string, Tree>(semesterName, newTree));
 
 }
 
 int main() {
 
-    set<Tree> trees;
+    map<string, Tree> trees;
     getData(trees);
     return 0;
 
