@@ -20,7 +20,8 @@ public:
 	}
 
 	Node* insert(Node* node, int date, map<string, int> assignments, bool& success);
-	map<string, int> search(Node* node, int date);
+	map<string, int> searchMap(Node* node, int date);
+	Node* searchNode(Node* node, int date);
 	void printAssignments(Node* node, int date);
 	int getHeight(Node* node);
 	int getBalanceFactor(Node* node);
@@ -75,19 +76,30 @@ Node* Tree::insert(Node* node, int date, map<string, int> assignments, bool& suc
 	return node;
 }
 
-map<string, int> Tree::search(Node* node, int date) {
+map<string, int> Tree::searchMap(Node* node, int date) {
 	if (node == nullptr)
 		return { {"INVALID", 99} };
-	else if (node->date = date)
+	else if (node->date == date)
 		return node->assignments;
 	else if (date < node->date)
-		return search(node->left, date);
+		return searchMap(node->left, date);
 	else
-		return search(node->right, date);
+		return searchMap(node->right, date);
+}
+
+Node* Tree::searchNode(Node* node, int date) {
+	if (node == nullptr)
+		return nullptr;
+	else if (node->date == date)
+		return node;
+	else if (date < node->date)
+		return searchNode(node->left, date);
+	else
+		return searchNode(node->right, date);
 }
 
 void Tree::printAssignments(Node* node, int date) {
-	map<string, int> list = search(node, date);
+	map<string, int> list = searchMap(node, date);
 
 	if (list.empty() == true) {
 		cout << "There are no assignments due on this day." << endl;
