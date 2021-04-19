@@ -37,7 +37,9 @@ void getData(map<string, Tree>& trees) {
             pos = 0;
             int pos2 = 0;
             int newDate = 0;
-            string inDate, number, outDate;
+            string inDate = "";
+            string number = "";
+            string outDate = "";
             bool success;
 
             while ((pos = tempLine.find(",")) != string::npos) {
@@ -46,7 +48,12 @@ void getData(map<string, Tree>& trees) {
 
                 for (int i = 0; i < 2; i++) {
                     size_t pos2 = inDate.find("/");
-                    number += inDate.substr(0, pos2);
+                    if ((i == 1) && (stoi(inDate.substr(0, pos2)) < 10)) {
+                        number = number + "0" + inDate.substr(0, pos2);
+                    }
+                    else {
+                        number += inDate.substr(0, pos2);
+                    }
                     inDate.erase(0, pos2 + 1);
                 }
 
@@ -69,7 +76,12 @@ void getData(map<string, Tree>& trees) {
 
             for (int i = 0; i < 2; i++) {
                 size_t pos2 = tempLine.find("/");
-                number += tempLine.substr(0, pos2);
+                if ((i == 2) && (stoi(tempLine.substr(0, pos2)) < 10)) {
+                    number = number + "0" + tempLine.substr(0, pos2);
+                }
+                else {
+                    number += tempLine.substr(0, pos2);
+                }
                 tempLine.erase(0, pos2 + 1);
             }
 
@@ -99,6 +111,7 @@ int main() {
 
     map<string, Tree> trees;
     getData(trees);
+
     return 0;
 
 }
