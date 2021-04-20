@@ -2,8 +2,8 @@
 Repository for COP3530 final project, Course Planning Software (CPS)
 
 ## Contributors ##
-Andres Maldonado-Martin
-David DeVore
+* Andres Maldonado-Martin
+* David DeVore
 
 ## Files ##
 All source code files are located within the "src" directory.
